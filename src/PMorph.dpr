@@ -4,10 +4,10 @@ uses
   Forms,
   UFMain in 'UFMain.pas' {FMain},
   UDMMain in 'UDMMain.pas' {DMMain: TDataModule},
-  UMorphology in 'UMorphology.pas',
-  UBinarization in 'UBinarization.pas',
-  UImages in 'UImages.pas',
-  ULoadImgAndBinarization in 'ULoadImgAndBinarization.pas' {FLoadImgAndBinarization};
+  ULoadImgAndBinarization in 'ULoadImgAndBinarization.pas' {FLoadImgAndBinarization},
+  UBinarization in '..\..\ImgSharedUnits\src\UBinarization.pas',
+  UImages in '..\..\ImgSharedUnits\src\UImages.pas',
+  UMorphology in '..\..\ImgSharedUnits\src\UMorphology.pas';
 
 {$R *.res}
 
