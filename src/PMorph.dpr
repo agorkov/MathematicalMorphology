@@ -5,9 +5,10 @@ uses
   UFMain in 'UFMain.pas' {FMain},
   UDMMain in 'UDMMain.pas' {DMMain: TDataModule},
   ULoadImgAndBinarization in 'ULoadImgAndBinarization.pas' {FLoadImgAndBinarization},
-  UBinarization in '..\..\ImgSharedUnits\src\UBinarization.pas',
-  UImages in '..\..\ImgSharedUnits\src\UImages.pas',
-  UMorphology in '..\..\ImgSharedUnits\src\UMorphology.pas';
+  UBinarization in 'D:\ImgSharedUnits\src\UBinarization.pas',
+  UImages in 'D:\ImgSharedUnits\src\UImages.pas',
+  UMorphology in 'D:\ImgSharedUnits\src\UMorphology.pas',
+  UPixelConvert in 'D:\ImgSharedUnits\src\UPixelConvert.pas';
 
 {$R *.res}
 

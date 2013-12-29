@@ -98,7 +98,7 @@ var
   BM: TBitMap;
   i, j: word;
   r, g, b: byte;
-
+  RGBI: TRGBImage;
 begin
   if OPD.Execute then
   begin
@@ -122,7 +122,8 @@ begin
         BM.Canvas.Pixels[j, i] := RGB(round(0.299 * r + 0.587 * g + 0.114 * b), round(0.299 * r + 0.587 * g + 0.114 * b), round(0.299 * r + 0.587 * g + 0.114 * b));
       end;
     IIn.Picture.Assign(BM);
-    LoadGSIFromBitMap(GSI, BM);
+    LoadRGBIFromBitMap(RGBI, BM);
+    GSI := ConvertRGBIToGSI(RGBI);
     BM.Free;
   end;
 end;
