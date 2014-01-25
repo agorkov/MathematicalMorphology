@@ -3,7 +3,7 @@ unit ULoadImgAndBinarization;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ExtDlgs, Vcl.ComCtrls, UImages;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ExtDlgs, Vcl.ComCtrls, UBinaryImages;
 
 type
   TFLoadImgAndBinarization = class(TForm)
@@ -34,7 +34,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UBinarization, JPEG;
+  UBinarization, UGrayscaleImages, URGBImages, JPEG;
 
 var
   GSI: TGreyscaleImage;
@@ -122,7 +122,7 @@ begin
         BM.Canvas.Pixels[j, i] := RGB(round(0.299 * r + 0.587 * g + 0.114 * b), round(0.299 * r + 0.587 * g + 0.114 * b), round(0.299 * r + 0.587 * g + 0.114 * b));
       end;
     IIn.Picture.Assign(BM);
-    LoadRGBIFromBitMap(RGBI, BM);
+    RGBI:=LoadRGBIFromBitMap(BM);
     GSI := ConvertRGBIToGSI(RGBI);
     BM.Free;
   end;

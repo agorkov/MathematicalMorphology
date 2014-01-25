@@ -100,7 +100,8 @@ implementation
 {$R *.dfm}
 
 uses
-  UDMMain, UImages, UMorphology, UBinarization, jpeg, ULoadImgAndBinarization;
+  UDMMain, UMorphology, UBinarization, jpeg, ULoadImgAndBinarization, UBinaryImages, UGrayscaleImages,
+  UImages;
 
 var
   Img, ImgR: TBinaryImage;
@@ -114,7 +115,7 @@ var
 begin
   if (Img.N > 30) or (Img.M > 30) then
   begin
-    FMain.Image1.Picture.Assign(UImages.SaveBinaryImgToBitMap(Img));
+    FMain.Image1.Picture.Assign(SaveBinaryImgToBitMap(Img));
     exit;
   end;
   FMain.Image1.Picture.Bitmap.Height := FMain.Image1.Height;
@@ -175,7 +176,7 @@ var
 begin
   if (ImgR.N > 30) or (ImgR.M > 30) then
   begin
-    FMain.Image3.Picture.Assign(UImages.SaveBinaryImgToBitMap(ImgR));
+    FMain.Image3.Picture.Assign(SaveBinaryImgToBitMap(ImgR));
     exit;
   end;
   FMain.Image3.Picture.Bitmap.Height := FMain.Image3.Height;
