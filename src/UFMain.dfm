@@ -16,14 +16,14 @@
   OnCanResize = FormCanResize
   PixelsPerInch = 96
   TextHeight = 13
-  object Image2: TImage
+  object ImgMask: TImage
     Left = 349
     Top = 93
     Width = 330
     Height = 330
-    OnMouseDown = Image2MouseDown
+    OnMouseDown = ImgMaskMouseDown
   end
-  object Image1: TImage
+  object ImgOrigin: TImage
     Left = 8
     Top = 93
     Width = 330
@@ -31,9 +31,9 @@
     Center = True
     Proportional = True
     Stretch = True
-    OnMouseDown = Image1MouseDown
+    OnMouseDown = ImgOriginMouseDown
   end
-  object Image3: TImage
+  object ImgResult: TImage
     Left = 690
     Top = 93
     Width = 330
@@ -41,7 +41,7 @@
     Center = True
     Proportional = True
     Stretch = True
-    OnClick = Image3Click
+    OnClick = ImgResultClick
   end
   object GBMaskSettings: TGroupBox
     Left = 349
@@ -248,42 +248,42 @@
   end
   object GBImgLog: TGroupBox
     Left = 8
-    Top = 429
+    Top = 432
     Width = 330
-    Height = 66
+    Height = 157
     Caption = #1051#1086#1075#1080#1095#1077#1089#1082#1080#1077' '#1086#1087#1077#1088#1072#1094#1080#1080':'
     TabOrder = 3
     object BNot: TButton
       Left = 3
       Top = 24
-      Width = 56
+      Width = 324
       Height = 25
       Caption = 'Not'
       TabOrder = 0
       OnClick = BNotClick
     end
     object BAnd: TButton
-      Left = 95
-      Top = 24
-      Width = 56
+      Left = 3
+      Top = 67
+      Width = 324
       Height = 25
       Caption = 'And'
       TabOrder = 1
       OnClick = BAndClick
     end
     object BOR: TButton
-      Left = 177
-      Top = 24
-      Width = 56
+      Left = 3
+      Top = 98
+      Width = 324
       Height = 25
       Caption = 'Or'
       TabOrder = 2
       OnClick = BORClick
     end
     object BXOR: TButton
-      Left = 271
-      Top = 24
-      Width = 56
+      Left = 3
+      Top = 129
+      Width = 324
       Height = 25
       Caption = 'xOr'
       TabOrder = 3

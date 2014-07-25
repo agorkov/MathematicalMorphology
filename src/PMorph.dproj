@@ -155,7 +155,6 @@
 			<DCCReference Include="D:\ImgSharedUnits\src\UBinaryImages.pas"/>
 			<DCCReference Include="D:\ImgSharedUnits\src\UFilter.pas"/>
 			<DCCReference Include="D:\ImgSharedUnits\src\UGrayscaleImages.pas"/>
-			<DCCReference Include="D:\ImgSharedUnits\src\UImages.pas"/>
 			<DCCReference Include="D:\ImgSharedUnits\src\UMorphology.pas"/>
 			<DCCReference Include="D:\ImgSharedUnits\src\UPixelConvert.pas"/>
 			<DCCReference Include="D:\ImgSharedUnits\src\URGBImages.pas"/>

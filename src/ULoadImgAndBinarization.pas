@@ -15,10 +15,15 @@ type
     LEThresold: TLabeledEdit;
     BThresoldBinarization: TButton;
     UpDown1: TUpDown;
+    GroupBox1: TGroupBox;
+    LER: TLabeledEdit;
+    LEBThresold: TLabeledEdit;
+    BBersenBinarization: TButton;
     procedure FormActivate(Sender: TObject);
     procedure IInDblClick(Sender: TObject);
     procedure BThresoldBinarizationClick(Sender: TObject);
     procedure BCloseClick(Sender: TObject);
+    procedure BBersenBinarizationClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,6 +43,15 @@ uses
 
 var
   GSI: TGreyscaleImage;
+
+procedure TFLoadImgAndBinarization.BBersenBinarizationClick(Sender: TObject);
+var
+  BM: TBitMap;
+begin
+  BM := SaveBinaryImgToBitMap(BernsenBinarization(GSI, strtoint(LER.Text),strtoint(LEBThresold.Text)));
+  IOut.Picture.Assign(BM);
+  BM.Free;
+end;
 
 procedure TFLoadImgAndBinarization.BCloseClick(Sender: TObject);
 begin
@@ -122,7 +136,7 @@ begin
         BM.Canvas.Pixels[j, i] := RGB(round(0.299 * r + 0.587 * g + 0.114 * b), round(0.299 * r + 0.587 * g + 0.114 * b), round(0.299 * r + 0.587 * g + 0.114 * b));
       end;
     IIn.Picture.Assign(BM);
-    RGBI:=LoadRGBIFromBitMap(BM);
+    RGBI := LoadRGBIFromBitMap(BM);
     GSI := ConvertRGBIToGSI(RGBI);
     BM.Free;
   end;

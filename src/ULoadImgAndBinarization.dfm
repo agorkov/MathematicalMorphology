@@ -48,7 +48,7 @@ object FLoadImgAndBinarization: TFLoadImgAndBinarization
     Top = 8
     Width = 109
     Height = 89
-    Caption = #1055#1086#1088#1086#1075#1086#1074#1072#1103' ...'
+    Caption = #1055#1086#1088#1086#1075#1086#1074#1072#1103
     TabOrder = 1
     object LEThresold: TLabeledEdit
       Left = 3
@@ -79,6 +79,45 @@ object FLoadImgAndBinarization: TFLoadImgAndBinarization
       Max = 255
       Position = 50
       TabOrder = 2
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 263
+    Top = 103
+    Width = 109
+    Height = 90
+    Caption = #1041#1077#1088#1089#1077#1085#1072
+    TabOrder = 2
+    object LER: TLabeledEdit
+      Left = 3
+      Top = 32
+      Width = 22
+      Height = 21
+      EditLabel.Width = 8
+      EditLabel.Height = 13
+      EditLabel.Caption = 'r:'
+      TabOrder = 0
+      Text = '1'
+    end
+    object LEBThresold: TLabeledEdit
+      Left = 31
+      Top = 32
+      Width = 75
+      Height = 21
+      EditLabel.Width = 34
+      EditLabel.Height = 13
+      EditLabel.Caption = #1055#1086#1088#1086#1075':'
+      TabOrder = 1
+      Text = '170'
+    end
+    object BBersenBinarization: TButton
+      Left = 3
+      Top = 59
+      Width = 103
+      Height = 25
+      Caption = #1041#1080#1085#1072#1088#1080#1079#1072#1094#1080#1103
+      TabOrder = 2
+      OnClick = BBersenBinarizationClick
     end
   end
   object OPD: TOpenPictureDialog

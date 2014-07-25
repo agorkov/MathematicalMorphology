@@ -16,7 +16,7 @@ type
     UDImgH: TUpDown;
     BSelectImg: TButton;
     BSaveImg: TButton;
-    Image1: TImage;
+    ImgOrigin: TImage;
     GBImgLog: TGroupBox;
     BNot: TButton;
     BAnd: TButton;
@@ -39,14 +39,14 @@ type
     UDMaskCY: TUpDown;
     BSelectMask: TButton;
     BSaveMask: TButton;
-    Image2: TImage;
+    ImgMask: TImage;
     Скелетизация: TButton;
     GPOperations: TGroupBox;
     BDilation: TButton;
     BErosion: TButton;
     BOpening: TButton;
     BClosing: TButton;
-    Image3: TImage;
+    ImgResult: TImage;
     GBOtherMorphOperation: TGroupBox;
     BHitorMiss: TButton;
     BComditional_dilation: TButton;
@@ -61,11 +61,11 @@ type
     procedure BClosingClick(Sender: TObject);
     procedure BOpeningClick(Sender: TObject);
     procedure BComditional_dilationClick(Sender: TObject);
-    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ImgOriginMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormActivate(Sender: TObject);
     procedure EImgWChange(Sender: TObject);
     procedure EImgHChange(Sender: TObject);
-    procedure Image2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ImgMaskMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure EMaskWChange(Sender: TObject);
     procedure EMaskHChange(Sender: TObject);
     procedure EMaskCXChange(Sender: TObject);
@@ -83,7 +83,7 @@ type
     procedure BBorderClick(Sender: TObject);
     procedure BCarcassClick(Sender: TObject);
     procedure СкелетизацияClick(Sender: TObject);
-    procedure Image3Click(Sender: TObject);
+    procedure ImgResultClick(Sender: TObject);
     procedure BLoadImageClick(Sender: TObject);
   private
     { Private declarations }
@@ -100,8 +100,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UDMMain, UMorphology, UBinarization, jpeg, ULoadImgAndBinarization, UBinaryImages, UGrayscaleImages,
-  UImages;
+  UDMMain, UMorphology, UBinarization, jpeg, ULoadImgAndBinarization, UBinaryImages, UGrayscaleImages;
 
 var
   Img, ImgR: TBinaryImage;
@@ -115,17 +114,17 @@ var
 begin
   if (Img.N > 30) or (Img.M > 30) then
   begin
-    FMain.Image1.Picture.Assign(SaveBinaryImgToBitMap(Img));
+    FMain.ImgOrigin.Picture.Assign(SaveBinaryImgToBitMap(Img));
     exit;
   end;
-  FMain.Image1.Picture.Bitmap.Height := FMain.Image1.Height;
-  FMain.Image1.Picture.Bitmap.Width := FMain.Image1.Width;
-  FMain.Image1.Canvas.Pen.Color := clGray;
-  FMain.Image1.Canvas.Brush.Color := clGray;
-  FMain.Image1.Canvas.Rectangle(0, 0, FMain.Image1.Height, FMain.Image1.Width);
+  FMain.ImgOrigin.Picture.Bitmap.Height := FMain.ImgOrigin.Height;
+  FMain.ImgOrigin.Picture.Bitmap.Width := FMain.ImgOrigin.Width;
+  FMain.ImgOrigin.Canvas.Pen.Color := clGray;
+  FMain.ImgOrigin.Canvas.Brush.Color := clGray;
+  FMain.ImgOrigin.Canvas.Rectangle(0, 0, FMain.ImgOrigin.Height, FMain.ImgOrigin.Width);
 
-  wn := FMain.Image1.Height div Img.N;
-  wm := FMain.Image1.Height div Img.M;
+  wn := FMain.ImgOrigin.Height div Img.N;
+  wm := FMain.ImgOrigin.Height div Img.M;
   if wn > wm then
     w := wm
   else
@@ -135,10 +134,10 @@ begin
     for j := 1 to Img.M do
     begin
       if Img.i[i, j] then
-        FMain.Image1.Canvas.Brush.Color := clBlack
+        FMain.ImgOrigin.Canvas.Brush.Color := clBlack
       else
-        FMain.Image1.Canvas.Brush.Color := clWhite;
-      FMain.Image1.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
+        FMain.ImgOrigin.Canvas.Brush.Color := clWhite;
+      FMain.ImgOrigin.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
     end;
 end;
 
@@ -147,12 +146,12 @@ var
   i, j: word;
   wn, wm, w: word;
 begin
-  FMain.Image2.Canvas.Pen.Color := clGray;
-  FMain.Image2.Canvas.Brush.Color := clGray;
-  FMain.Image2.Canvas.Rectangle(0, 0, FMain.Image2.Height, FMain.Image2.Width);
+  FMain.ImgMask.Canvas.Pen.Color := clGray;
+  FMain.ImgMask.Canvas.Brush.Color := clGray;
+  FMain.ImgMask.Canvas.Rectangle(0, 0, FMain.ImgMask.Height, FMain.ImgMask.Width);
 
-  wn := FMain.Image2.Height div Mask.Mask.N;
-  wm := FMain.Image2.Height div Mask.Mask.M;
+  wn := FMain.ImgMask.Height div Mask.Mask.N;
+  wm := FMain.ImgMask.Height div Mask.Mask.M;
   if wn > wm then
     w := wm
   else
@@ -162,10 +161,10 @@ begin
     for j := 1 to Mask.Mask.M do
     begin
       if Mask.Mask.i[i, j] then
-        FMain.Image2.Canvas.Brush.Color := clBlack
+        FMain.ImgMask.Canvas.Brush.Color := clBlack
       else
-        FMain.Image2.Canvas.Brush.Color := clWhite;
-      FMain.Image2.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
+        FMain.ImgMask.Canvas.Brush.Color := clWhite;
+      FMain.ImgMask.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
     end;
 end;
 
@@ -176,17 +175,17 @@ var
 begin
   if (ImgR.N > 30) or (ImgR.M > 30) then
   begin
-    FMain.Image3.Picture.Assign(SaveBinaryImgToBitMap(ImgR));
+    FMain.ImgResult.Picture.Assign(SaveBinaryImgToBitMap(ImgR));
     exit;
   end;
-  FMain.Image3.Picture.Bitmap.Height := FMain.Image3.Height;
-  FMain.Image3.Picture.Bitmap.Width := FMain.Image3.Width;
-  FMain.Image3.Canvas.Pen.Color := clGray;
-  FMain.Image3.Canvas.Brush.Color := clGray;
-  FMain.Image3.Canvas.Rectangle(0, 0, FMain.Image3.Height, FMain.Image3.Width);
+  FMain.ImgResult.Picture.Bitmap.Height := FMain.ImgResult.Height;
+  FMain.ImgResult.Picture.Bitmap.Width := FMain.ImgResult.Width;
+  FMain.ImgResult.Canvas.Pen.Color := clGray;
+  FMain.ImgResult.Canvas.Brush.Color := clGray;
+  FMain.ImgResult.Canvas.Rectangle(0, 0, FMain.ImgResult.Height, FMain.ImgResult.Width);
 
-  wn := FMain.Image3.Height div Img.N;
-  wm := FMain.Image3.Height div Img.M;
+  wn := FMain.ImgResult.Height div Img.N;
+  wm := FMain.ImgResult.Height div Img.M;
   if wn > wm then
     w := wm
   else
@@ -196,10 +195,10 @@ begin
     for j := 1 to Img.M do
     begin
       if ImgR.i[i, j] then
-        FMain.Image3.Canvas.Brush.Color := clBlack
+        FMain.ImgResult.Canvas.Brush.Color := clBlack
       else
-        FMain.Image3.Canvas.Brush.Color := clWhite;
-      FMain.Image3.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
+        FMain.ImgResult.Canvas.Brush.Color := clWhite;
+      FMain.ImgResult.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
     end;
 end;
 
@@ -292,20 +291,20 @@ end;
 
 procedure TFMain.BNotClick(Sender: TObject);
 begin
-  Img := ImgNOT(Img);
-  DrawImg;
+  ImgR := ImgNOT(Img);
+  DrawImgR;
 end;
 
 procedure TFMain.BXORClick(Sender: TObject);
 begin
   ImgR := ImgXOR(Img, ImgR);
-  DrawImg;
+  DrawImgR;
 end;
 
 procedure TFMain.BORClick(Sender: TObject);
 begin
   ImgR := ImgOR(Img, ImgR);
-  DrawImg;
+  DrawImgR;
 end;
 
 procedure TFMain.СкелетизацияClick(Sender: TObject);
@@ -379,12 +378,12 @@ end;
 
 procedure TFMain.BSaveImageClick(Sender: TObject);
 begin
-  Image1.Picture.SaveToFile('ORIGIN.bmp');
+  ImgOrigin.Picture.SaveToFile('ORIGIN.bmp');
 end;
 
 procedure TFMain.BSaveResultClick(Sender: TObject);
 begin
-  Image3.Picture.SaveToFile('RESULT.bmp');
+  ImgResult.Picture.SaveToFile('RESULT.bmp');
 end;
 
 procedure TFMain.BDilationClick(Sender: TObject);
@@ -414,7 +413,7 @@ end;
 procedure TFMain.BAndClick(Sender: TObject);
 begin
   ImgR := ImgAND(Img, ImgR);
-  DrawImg;
+  DrawImgR;
 end;
 
 procedure TFMain.BBorderClick(Sender: TObject);
@@ -493,36 +492,39 @@ begin
   Resize := false;
 end;
 
-procedure TFMain.Image1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TFMain.ImgOriginMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   wn, wm, w, i, j: word;
 begin
-  if (FMain.Image1.Canvas.Pixels[X, Y] = clBlack) or (FMain.Image1.Canvas.Pixels[X, Y] = clWhite) then
+  if (Img.N <= 30) and (Img.M <= 30) then
   begin
-    wn := FMain.Image1.Height div Img.N;
-    wm := FMain.Image1.Height div Img.M;
-    if wn > wm then
-      w := wm
-    else
-      w := wn;
-    i := (Y div w) + 1;
-    j := (X div w) + 1;
-    Img.i[i, j] := not Img.i[i, j];
-    DrawImg;
+    if (FMain.ImgOrigin.Canvas.Pixels[X, Y] = clBlack) or (FMain.ImgOrigin.Canvas.Pixels[X, Y] = clWhite) then
+    begin
+      wn := FMain.ImgOrigin.Height div Img.N;
+      wm := FMain.ImgOrigin.Height div Img.M;
+      if wn > wm then
+        w := wm
+      else
+        w := wn;
+      i := (Y div w) + 1;
+      j := (X div w) + 1;
+      Img.i[i, j] := not Img.i[i, j];
+      DrawImg;
+    end;
   end;
 end;
 
-procedure TFMain.Image2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TFMain.ImgMaskMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   wn, wm, w, i, j: word;
 begin
   w := 0;
   i := 0;
   j := 0;
-  if (FMain.Image2.Canvas.Pixels[X, Y] = clBlack) or (FMain.Image2.Canvas.Pixels[X, Y] = clWhite) then
+  if (FMain.ImgMask.Canvas.Pixels[X, Y] = clBlack) or (FMain.ImgMask.Canvas.Pixels[X, Y] = clWhite) then
   begin
-    wn := FMain.Image2.Height div Mask.Mask.N;
-    wm := FMain.Image2.Height div Mask.Mask.M;
+    wn := FMain.ImgMask.Height div Mask.Mask.N;
+    wm := FMain.ImgMask.Height div Mask.Mask.M;
     if wn > wm then
       w := wm
     else
@@ -541,7 +543,7 @@ begin
   end;
 end;
 
-procedure TFMain.Image3Click(Sender: TObject);
+procedure TFMain.ImgResultClick(Sender: TObject);
 begin
   Img := ImgOR(ImgR, ImgR);
   DrawImg;
