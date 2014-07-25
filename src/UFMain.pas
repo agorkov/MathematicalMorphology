@@ -100,7 +100,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UDMMain, UMorphology, UBinarization, jpeg, ULoadImgAndBinarization, UBinaryImages, UGrayscaleImages;
+  UDMMain, UMorphology, UBinarization, jpeg, ULoadImgAndBinarization, UBinaryImages, UGrayscaleImages, UFBigImage;
 
 var
   Img, ImgR: TBinaryImage;
@@ -496,22 +496,28 @@ procedure TFMain.ImgOriginMouseDown(Sender: TObject; Button: TMouseButton; Shift
 var
   wn, wm, w, i, j: word;
 begin
-  if (Img.N <= 30) and (Img.M <= 30) then
+  if ssCtrl in Shift then
   begin
-    if (FMain.ImgOrigin.Canvas.Pixels[X, Y] = clBlack) or (FMain.ImgOrigin.Canvas.Pixels[X, Y] = clWhite) then
+    UFBigImage.FBigImage.Image1.Picture.Bitmap.Assign(ImgOrigin.Picture.Bitmap);
+    UFBigImage.FBigImage.ShowModal;
+  end
+  else
+    if (Img.N <= 30) and (Img.M <= 30) then
     begin
-      wn := FMain.ImgOrigin.Height div Img.N;
-      wm := FMain.ImgOrigin.Height div Img.M;
-      if wn > wm then
-        w := wm
-      else
-        w := wn;
-      i := (Y div w) + 1;
-      j := (X div w) + 1;
-      Img.i[i, j] := not Img.i[i, j];
-      DrawImg;
+      if (FMain.ImgOrigin.Canvas.Pixels[X, Y] = clBlack) or (FMain.ImgOrigin.Canvas.Pixels[X, Y] = clWhite) then
+      begin
+        wn := FMain.ImgOrigin.Height div Img.N;
+        wm := FMain.ImgOrigin.Height div Img.M;
+        if wn > wm then
+          w := wm
+        else
+          w := wn;
+        i := (Y div w) + 1;
+        j := (X div w) + 1;
+        Img.i[i, j] := not Img.i[i, j];
+        DrawImg;
+      end;
     end;
-  end;
 end;
 
 procedure TFMain.ImgMaskMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);

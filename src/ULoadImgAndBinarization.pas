@@ -44,21 +44,6 @@ uses
 var
   GSI: TGreyscaleImage;
 
-procedure TFLoadImgAndBinarization.BBersenBinarizationClick(Sender: TObject);
-var
-  BM: TBitMap;
-begin
-  BM := SaveBinaryImgToBitMap(BernsenBinarization(GSI, strtoint(LER.Text),strtoint(LEBThresold.Text)));
-  IOut.Picture.Assign(BM);
-  BM.Free;
-end;
-
-procedure TFLoadImgAndBinarization.BCloseClick(Sender: TObject);
-begin
-  BI := ThresoldBinarization(GSI, strtoint(LEThresold.Text));
-  FLoadImgAndBinarization.Close;
-end;
-
 procedure TFLoadImgAndBinarization.BThresoldBinarizationClick(Sender: TObject);
 var
   BM: TBitMap;
@@ -66,6 +51,26 @@ begin
   BM := SaveBinaryImgToBitMap(ThresoldBinarization(GSI, strtoint(LEThresold.Text)));
   IOut.Picture.Assign(BM);
   BM.Free;
+  IOut.Tag := 1;
+end;
+
+procedure TFLoadImgAndBinarization.BBersenBinarizationClick(Sender: TObject);
+var
+  BM: TBitMap;
+begin
+  BM := SaveBinaryImgToBitMap(BernsenBinarization(GSI, strtoint(LER.Text), strtoint(LEBThresold.Text)));
+  IOut.Picture.Assign(BM);
+  BM.Free;
+  IOut.Tag := 2;
+end;
+
+procedure TFLoadImgAndBinarization.BCloseClick(Sender: TObject);
+begin
+  case IOut.Tag of
+  1: BI := ThresoldBinarization(GSI, strtoint(LEThresold.Text));
+  2: BI := BernsenBinarization(GSI, strtoint(LER.Text), strtoint(LEBThresold.Text));
+  end;
+  FLoadImgAndBinarization.Close;
 end;
 
 procedure TFLoadImgAndBinarization.FormActivate(Sender: TObject);

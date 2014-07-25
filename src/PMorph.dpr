@@ -11,7 +11,8 @@ uses
   UGrayscaleImages in 'D:\ImgSharedUnits\src\UGrayscaleImages.pas',
   UMorphology in 'D:\ImgSharedUnits\src\UMorphology.pas',
   UPixelConvert in 'D:\ImgSharedUnits\src\UPixelConvert.pas',
-  URGBImages in 'D:\ImgSharedUnits\src\URGBImages.pas';
+  URGBImages in 'D:\ImgSharedUnits\src\URGBImages.pas',
+  UFBigImage in 'UFBigImage.pas' {FBigImage};
 
 {$R *.res}
 
@@ -21,5 +22,6 @@ begin
   Application.CreateForm(TFMain, FMain);
   Application.CreateForm(TDMMain, DMMain);
   Application.CreateForm(TFLoadImgAndBinarization, FLoadImgAndBinarization);
+  Application.CreateForm(TFBigImage, FBigImage);
   Application.Run;
 end.
