@@ -16,9 +16,12 @@ type
     EImgH: TEdit;
     UDImgH: TUpDown;
     ImgOrigin: TImage;
+    SPD: TSavePictureDialog;
+    BSaveIIn: TButton;
     procedure UDClick(Sender: TObject; Button: TUDBtnType);
     procedure FormCreate(Sender: TObject);
     procedure ImgOriginMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure BSaveIInClick(Sender: TObject);
   private
 
   public
@@ -38,7 +41,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UBinaryImages, UGrayscaleImages, UFBigImage, Math;
+  UBinaryImages, UGrayscaleImages, UFBigImage, Math, UBitMapFunctions;
 
 var
   IIn: TCBinaryImage;
@@ -96,6 +99,22 @@ end;
 procedure TFMain.DrawIOut;
 begin
 
+end;
+
+procedure TFMain.BSaveIInClick(Sender: TObject);
+var
+  FileName: string;
+  BM: TBitMap;
+begin
+  if SPD.Execute then
+  begin
+    FileName := SPD.FileName;
+    if UpperCase(ExtractFileExt(FileName)) <> '.PNG' then
+      FileName := FileName + '.PNG';
+    BM := IIn.SaveToBitMap;
+    UBitMapFunctions.SaveToFile(BM, FileName);
+    BM.Free;
+  end;
 end;
 
 procedure TFMain.DrawAll;

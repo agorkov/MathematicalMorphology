@@ -88,5 +88,19 @@ object FMain: TFMain
       TabOrder = 3
       OnClick = UDClick
     end
+    object BSaveIIn: TButton
+      Left = 152
+      Top = 15
+      Width = 163
+      Height = 53
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      TabOrder = 4
+      OnClick = BSaveIInClick
+    end
+  end
+  object SPD: TSavePictureDialog
+    Filter = 'Portable Network Graphics (*.png)|*.png'
+    Left = 24
+    Top = 104
   end
 end
