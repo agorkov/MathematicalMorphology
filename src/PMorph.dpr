@@ -3,16 +3,12 @@ program PMorph;
 uses
   Forms,
   UFMain in 'UFMain.pas' {FMain},
-  UDMMain in 'UDMMain.pas' {DMMain: TDataModule},
-  ULoadImgAndBinarization in 'ULoadImgAndBinarization.pas' {FLoadImgAndBinarization},
-  UBinarization in 'D:\ImgSharedUnits\src\UBinarization.pas',
-  UBinaryImages in 'D:\ImgSharedUnits\src\UBinaryImages.pas',
-  UFilter in 'D:\ImgSharedUnits\src\UFilter.pas',
-  UGrayscaleImages in 'D:\ImgSharedUnits\src\UGrayscaleImages.pas',
-  UMorphology in 'D:\ImgSharedUnits\src\UMorphology.pas',
-  UPixelConvert in 'D:\ImgSharedUnits\src\UPixelConvert.pas',
-  URGBImages in 'D:\ImgSharedUnits\src\URGBImages.pas',
-  UFBigImage in 'UFBigImage.pas' {FBigImage};
+  UFBigImage in 'UFBigImage.pas' {FBigImage},
+  UBinaryImages in '..\..\ImgSharedUnits\src\UBinaryImages.pas',
+  UBitMapFunctions in '..\..\ImgSharedUnits\src\UBitMapFunctions.pas',
+  UColorImages in '..\..\ImgSharedUnits\src\UColorImages.pas',
+  UGrayscaleImages in '..\..\ImgSharedUnits\src\UGrayscaleImages.pas',
+  UPixelConvert in '..\..\ImgSharedUnits\src\UPixelConvert.pas';
 
 {$R *.res}
 
@@ -20,8 +16,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFMain, FMain);
-  Application.CreateForm(TDMMain, DMMain);
-  Application.CreateForm(TFLoadImgAndBinarization, FLoadImgAndBinarization);
   Application.CreateForm(TFBigImage, FBigImage);
   Application.Run;
 end.
