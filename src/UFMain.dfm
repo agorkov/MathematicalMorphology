@@ -43,9 +43,8 @@ object FMain: TFMain
     Center = True
     Proportional = True
     Stretch = True
-    OnMouseDown = ImgMaskMouseDown
   end
-  object GPImgSettings: TGroupBox
+  object GBIIn: TGroupBox
     Left = 8
     Top = 6
     Width = 330
@@ -118,12 +117,12 @@ object FMain: TFMain
       OnClick = BSaveIInClick
     end
   end
-  object GroupBox1: TGroupBox
+  object GPIMask: TGroupBox
     Left = 344
     Top = 6
     Width = 330
     Height = 81
-    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1080#1079#1086#1073#1088#1072#1078#1077#1085#1080#1103':'
+    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1084#1072#1089#1082#1080':'
     TabOrder = 1
     object Label3: TLabel
       Left = 71

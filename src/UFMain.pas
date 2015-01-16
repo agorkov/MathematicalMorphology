@@ -8,7 +8,7 @@ uses
 
 type
   TFMain = class(TForm)
-    GPImgSettings: TGroupBox;
+    GBIIn: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
     EIinW: TEdit;
@@ -19,7 +19,7 @@ type
     SPD: TSavePictureDialog;
     BSaveIIn: TButton;
     ImgMask: TImage;
-    GroupBox1: TGroupBox;
+    GPIMask: TGroupBox;
     Label3: TLabel;
     Label4: TLabel;
     EMaskW: TEdit;
@@ -147,8 +147,38 @@ begin
 end;
 
 procedure TFMain.DrawIOut;
+var
+  i, j: word;
+  w: word;
 begin
-
+  /// Очищаем изображение
+  ImgOut.Picture.Bitmap.Height := ImgOut.Height;
+  ImgOut.Picture.Bitmap.Width := ImgOut.Width;
+  ImgOut.Canvas.Pen.Color := clGray;
+  ImgOut.Canvas.Brush.Color := clGray;
+  ImgOut.Canvas.Rectangle(
+    0,
+    0,
+    ImgOut.Height - 1,
+    ImgOut.Width - 1);
+  /// Выбираем размер пикселя
+  w := min(
+    ImgOut.Height div IOut.Height,
+    ImgOut.Width div IOut.Width);
+  /// Отрисовываем изображение
+  for i := 1 to IOut.Height do
+    for j := 1 to IOut.Width do
+    begin
+      if IOut.Pixels[i - 1, j - 1] then
+        ImgOut.Canvas.Brush.Color := clBlack
+      else
+        ImgOut.Canvas.Brush.Color := clWhite;
+      ImgOut.Canvas.Rectangle(
+        (j - 1) * w,
+        (i - 1) * w,
+        j * w,
+        i * w);
+    end;
 end;
 
 procedure TFMain.Button1Click(Sender: TObject);
