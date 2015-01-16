@@ -3,7 +3,7 @@ object FMain: TFMain
   Top = 0
   Caption = #1054#1087#1077#1088#1072#1094#1080#1080' '#1084#1072#1090#1077#1084#1072#1090#1080#1095#1077#1089#1082#1086#1081' '#1084#1086#1088#1092#1086#1083#1086#1075#1080#1080'...'
   ClientHeight = 435
-  ClientWidth = 680
+  ClientWidth = 1018
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,7 +15,7 @@ object FMain: TFMain
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object ImgOrigin: TImage
+  object ImgIn: TImage
     Left = 8
     Top = 93
     Width = 330
@@ -23,10 +23,20 @@ object FMain: TFMain
     Center = True
     Proportional = True
     Stretch = True
-    OnMouseDown = ImgOriginMouseDown
+    OnMouseDown = ImgInMouseDown
   end
   object ImgMask: TImage
     Left = 344
+    Top = 93
+    Width = 330
+    Height = 330
+    Center = True
+    Proportional = True
+    Stretch = True
+    OnMouseDown = ImgMaskMouseDown
+  end
+  object ImgOut: TImage
+    Left = 680
     Top = 93
     Width = 330
     Height = 330
@@ -129,6 +139,20 @@ object FMain: TFMain
       Height = 13
       Caption = '- '#1074#1099#1089#1086#1090#1072
     end
+    object LMaskX: TLabel
+      Left = 136
+      Top = 20
+      Width = 35
+      Height = 13
+      Caption = 'LMaskX'
+    end
+    object LMaskY: TLabel
+      Left = 136
+      Top = 47
+      Width = 35
+      Height = 13
+      Caption = 'LMaskY'
+    end
     object EMaskW: TEdit
       Left = 17
       Top = 20
@@ -172,9 +196,9 @@ object FMain: TFMain
       OnClick = UDMaskClick
     end
     object Button1: TButton
-      Left = 152
+      Left = 208
       Top = 15
-      Width = 163
+      Width = 107
       Height = 53
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
       TabOrder = 4
