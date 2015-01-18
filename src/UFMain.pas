@@ -72,7 +72,7 @@ uses
 
 var
   IIn, IMask, IOut: TCBinaryImage;
-  MaskX, MaskY: word;
+  MaskRow, MaskCol: word;
 
 procedure TFMain.DrawIIn;
 var
@@ -142,8 +142,8 @@ begin
         j * w,
         i * w);
     end;
-  LMaskX.Caption := 'СтрЦ = ' + inttostr(MaskX);
-  LMaskY.Caption := 'СтЦ = ' + inttostr(MaskY);
+  LMaskX.Caption := 'СтрЦ = ' + inttostr(MaskRow);
+  LMaskY.Caption := 'СтЦ = ' + inttostr(MaskCol);
 end;
 
 procedure TFMain.DrawIOut;
@@ -227,8 +227,8 @@ begin
   /// Правой кнопкой выбираем центр маски
   if Button = mbRight then
   begin
-    MaskX := (Y div w) + 1;
-    MaskY := (X div w) + 1;
+    MaskRow := (Y div w) + 1;
+    MaskCol := (X div w) + 1;
   end;
   /// Отрисовываем маску
   DrawMask;
@@ -266,8 +266,8 @@ begin
   for i := 0 to IMask.Height - 1 do
     for j := 0 to IMask.Width - 1 do
       IMask.Pixels[i, j] := true;
-  MaskX := 2;
-  MaskY := 2;
+  MaskRow := 2;
+  MaskCol := 2;
 
   IOut := TCBinaryImage.Create;
   IOut.Height := IIn.Height;
@@ -308,6 +308,8 @@ procedure TFMain.ResizeMask;
 begin
   IMask.Height := UDMaskH.Position;
   IMask.Width := UDMaskW.Position;
+  MaskRow := (IMask.Height div 2) + 1;
+  MaskCol := (IMask.Width div 2) + 1;
   DrawAll;
 end;
 
