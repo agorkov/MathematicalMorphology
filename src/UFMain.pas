@@ -26,10 +26,16 @@ type
     UDMaskW: TUpDown;
     EMaskH: TEdit;
     UDMaskH: TUpDown;
-    Button1: TButton;
+    BSaveMask: TButton;
     LMaskX: TLabel;
     LMaskY: TLabel;
     ImgOut: TImage;
+    PCMorphology: TPageControl;
+    TSMain: TTabSheet;
+    BDilatation: TButton;
+    BErosion: TButton;
+    BClosing: TButton;
+    BOpening: TButton;
     procedure UDIInClick(
       Sender: TObject;
       Button: TUDBtnType);
@@ -48,7 +54,11 @@ type
       Button: TMouseButton;
       Shift: TShiftState;
       X, Y: Integer);
-    procedure Button1Click(Sender: TObject);
+    procedure BSaveMaskClick(Sender: TObject);
+    procedure BDilatationClick(Sender: TObject);
+    procedure BErosionClick(Sender: TObject);
+    procedure BClosingClick(Sender: TObject);
+    procedure BOpeningClick(Sender: TObject);
   private
 
   public
@@ -181,7 +191,7 @@ begin
     end;
 end;
 
-procedure TFMain.Button1Click(Sender: TObject);
+procedure TFMain.BSaveMaskClick(Sender: TObject);
 var
   FileName: string;
   BM: TBitMap;
@@ -274,6 +284,50 @@ begin
   IOut.Width := IIn.Width;
 
   DrawAll;
+end;
+
+procedure TFMain.BClosingClick(Sender: TObject);
+begin
+  IOut.FreeBinaryImage;
+  IOut := TCBinaryImage.CreateCopy(IIn);
+  IOut.closing(
+    IMask,
+    MaskRow - 1,
+    MaskCol - 1);
+  DrawIOut;
+end;
+
+procedure TFMain.BDilatationClick(Sender: TObject);
+begin
+  IOut.FreeBinaryImage;
+  IOut := TCBinaryImage.CreateCopy(IIn);
+  IOut.dilatation(
+    IMask,
+    MaskRow - 1,
+    MaskCol - 1);
+  DrawIOut;
+end;
+
+procedure TFMain.BErosionClick(Sender: TObject);
+begin
+  IOut.FreeBinaryImage;
+  IOut := TCBinaryImage.CreateCopy(IIn);
+  IOut.erosion(
+    IMask,
+    MaskRow - 1,
+    MaskCol - 1);
+  DrawIOut;
+end;
+
+procedure TFMain.BOpeningClick(Sender: TObject);
+begin
+  IOut.FreeBinaryImage;
+  IOut := TCBinaryImage.CreateCopy(IIn);
+  IOut.opening(
+    IMask,
+    MaskRow - 1,
+    MaskCol - 1);
+  DrawIOut;
 end;
 
 procedure TFMain.BSaveIInClick(Sender: TObject);

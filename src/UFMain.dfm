@@ -167,7 +167,7 @@ object FMain: TFMain
       Width = 15
       Height = 21
       Associate = EMaskW
-      Min = 2
+      Min = 1
       Max = 10
       Position = 3
       TabOrder = 1
@@ -188,20 +188,67 @@ object FMain: TFMain
       Width = 15
       Height = 21
       Associate = EMaskH
-      Min = 2
+      Min = 1
       Max = 10
       Position = 3
       TabOrder = 3
       OnClick = UDMaskClick
     end
-    object Button1: TButton
+    object BSaveMask: TButton
       Left = 208
       Top = 15
       Width = 107
       Height = 53
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
       TabOrder = 4
-      OnClick = Button1Click
+      OnClick = BSaveMaskClick
+    end
+  end
+  object PCMorphology: TPageControl
+    Left = 680
+    Top = 8
+    Width = 330
+    Height = 79
+    ActivePage = TSMain
+    TabOrder = 2
+    object TSMain: TTabSheet
+      Caption = #1054#1089#1085#1086#1074#1085#1099#1077' '#1086#1087#1077#1088#1072#1094#1080#1080
+      object BDilatation: TButton
+        Left = 3
+        Top = 3
+        Width = 75
+        Height = 45
+        Caption = #1044#1080#1083#1072#1090#1072#1094#1080#1103
+        TabOrder = 0
+        OnClick = BDilatationClick
+      end
+      object BErosion: TButton
+        Left = 84
+        Top = 3
+        Width = 75
+        Height = 45
+        Caption = #1069#1088#1086#1079#1080#1103
+        TabOrder = 1
+        OnClick = BErosionClick
+      end
+      object BClosing: TButton
+        Left = 165
+        Top = 3
+        Width = 75
+        Height = 45
+        Caption = #1047#1072#1084#1099#1082#1072#1085#1080#1077
+        TabOrder = 2
+        OnClick = BClosingClick
+      end
+      object BOpening: TButton
+        Left = 246
+        Top = 3
+        Width = 75
+        Height = 45
+        Caption = #1056#1072#1079#1084#1099#1082#1072#1085#1080#1077
+        TabOrder = 3
+        OnClick = BOpeningClick
+      end
     end
   end
   object SPD: TSavePictureDialog
