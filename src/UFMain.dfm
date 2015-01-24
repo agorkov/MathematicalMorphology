@@ -141,16 +141,16 @@ object FMain: TFMain
     object LMaskX: TLabel
       Left = 136
       Top = 20
-      Width = 35
+      Width = 47
       Height = 13
-      Caption = 'LMaskX'
+      Caption = #1057#1090#1088#1062' = 2'
     end
     object LMaskY: TLabel
       Left = 136
       Top = 47
-      Width = 35
+      Width = 41
       Height = 13
-      Caption = 'LMaskY'
+      Caption = #1057#1090#1062' = 2'
     end
     object EMaskW: TEdit
       Left = 17
