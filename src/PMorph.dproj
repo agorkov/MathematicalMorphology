@@ -143,10 +143,6 @@
 			<DCCReference Include="UFMain.pas">
 				<Form>FMain</Form>
 			</DCCReference>
-			<DCCReference Include="UFBigImage.pas">
-				<Form>FBigImage</Form>
-				<FormType>dfm</FormType>
-			</DCCReference>
 			<DCCReference Include="..\..\ImgSharedUnits\src\UBinaryImages.pas"/>
 			<DCCReference Include="..\..\ImgSharedUnits\src\UBitMapFunctions.pas"/>
 			<DCCReference Include="..\..\ImgSharedUnits\src\UColorImages.pas"/>

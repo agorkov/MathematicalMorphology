@@ -78,7 +78,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UBinaryImages, UGrayscaleImages, UFBigImage, Math, UBitMapFunctions;
+  UBinaryImages, UGrayscaleImages, Math, UBitMapFunctions;
 
 var
   IIn, IMask, IOut: TCBinaryImage;
