@@ -36,24 +36,12 @@ type
     BErosion: TButton;
     BClosing: TButton;
     BOpening: TButton;
-    procedure UDIInClick(
-      Sender: TObject;
-      Button: TUDBtnType);
-    procedure UDMaskClick(
-      Sender: TObject;
-      Button: TUDBtnType);
+    procedure UDIInClick(Sender: TObject; Button: TUDBtnType);
+    procedure UDMaskClick(Sender: TObject; Button: TUDBtnType);
     procedure FormCreate(Sender: TObject);
-    procedure ImgInMouseDown(
-      Sender: TObject;
-      Button: TMouseButton;
-      Shift: TShiftState;
-      X, Y: Integer);
+    procedure ImgInMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BSaveIInClick(Sender: TObject);
-    procedure ImgMaskMouseDown(
-      Sender: TObject;
-      Button: TMouseButton;
-      Shift: TShiftState;
-      X, Y: Integer);
+    procedure ImgMaskMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure BSaveMaskClick(Sender: TObject);
     procedure BDilatationClick(Sender: TObject);
     procedure BErosionClick(Sender: TObject);
@@ -94,15 +82,9 @@ begin
   ImgIn.Picture.Bitmap.Width := ImgIn.Width;
   ImgIn.Canvas.Pen.Color := clGray;
   ImgIn.Canvas.Brush.Color := clGray;
-  ImgIn.Canvas.Rectangle(
-    0,
-    0,
-    ImgIn.Height - 1,
-    ImgIn.Width - 1);
+  ImgIn.Canvas.Rectangle(0, 0, ImgIn.Height - 1, ImgIn.Width - 1);
   /// Выбираем размер пикселя
-  w := min(
-    ImgIn.Height div IIn.Height,
-    ImgIn.Width div IIn.Width);
+  w := min(ImgIn.Height div IIn.Height, ImgIn.Width div IIn.Width);
   /// Отрисовываем изображение
   for i := 1 to IIn.Height do
     for j := 1 to IIn.Width do
@@ -111,11 +93,7 @@ begin
         ImgIn.Canvas.Brush.Color := clBlack
       else
         ImgIn.Canvas.Brush.Color := clWhite;
-      ImgIn.Canvas.Rectangle(
-        (j - 1) * w,
-        (i - 1) * w,
-        j * w,
-        i * w);
+      ImgIn.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
     end;
 end;
 
@@ -129,15 +107,9 @@ begin
   ImgMask.Picture.Bitmap.Width := ImgMask.Width;
   ImgMask.Canvas.Pen.Color := clGray;
   ImgMask.Canvas.Brush.Color := clGray;
-  ImgMask.Canvas.Rectangle(
-    0,
-    0,
-    ImgMask.Height - 1,
-    ImgMask.Width - 1);
+  ImgMask.Canvas.Rectangle(0, 0, ImgMask.Height - 1, ImgMask.Width - 1);
   /// Выбираем размер пикселя
-  w := min(
-    ImgMask.Height div IMask.Height,
-    ImgMask.Width div IMask.Width);
+  w := min(ImgMask.Height div IMask.Height, ImgMask.Width div IMask.Width);
   /// Отрисовываем маску
   for i := 1 to IMask.Height do
     for j := 1 to IMask.Width do
@@ -146,11 +118,7 @@ begin
         ImgMask.Canvas.Brush.Color := clBlack
       else
         ImgMask.Canvas.Brush.Color := clWhite;
-      ImgMask.Canvas.Rectangle(
-        (j - 1) * w,
-        (i - 1) * w,
-        j * w,
-        i * w);
+      ImgMask.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
     end;
   LMaskX.Caption := 'СтрЦ = ' + inttostr(MaskRow);
   LMaskY.Caption := 'СтЦ = ' + inttostr(MaskCol);
@@ -166,15 +134,9 @@ begin
   ImgOut.Picture.Bitmap.Width := ImgOut.Width;
   ImgOut.Canvas.Pen.Color := clGray;
   ImgOut.Canvas.Brush.Color := clGray;
-  ImgOut.Canvas.Rectangle(
-    0,
-    0,
-    ImgOut.Height - 1,
-    ImgOut.Width - 1);
+  ImgOut.Canvas.Rectangle(0, 0, ImgOut.Height - 1, ImgOut.Width - 1);
   /// Выбираем размер пикселя
-  w := min(
-    ImgOut.Height div IOut.Height,
-    ImgOut.Width div IOut.Width);
+  w := min(ImgOut.Height div IOut.Height, ImgOut.Width div IOut.Width);
   /// Отрисовываем изображение
   for i := 1 to IOut.Height do
     for j := 1 to IOut.Width do
@@ -183,29 +145,20 @@ begin
         ImgOut.Canvas.Brush.Color := clBlack
       else
         ImgOut.Canvas.Brush.Color := clWhite;
-      ImgOut.Canvas.Rectangle(
-        (j - 1) * w,
-        (i - 1) * w,
-        j * w,
-        i * w);
+      ImgOut.Canvas.Rectangle((j - 1) * w, (i - 1) * w, j * w, i * w);
     end;
 end;
 
 procedure TFMain.BSaveMaskClick(Sender: TObject);
 var
   FileName: string;
-  BM: TBitMap;
 begin
   if SPD.Execute then
   begin
     FileName := SPD.FileName;
     if UpperCase(ExtractFileExt(FileName)) <> '.PNG' then
       FileName := FileName + '.PNG';
-    BM := IMask.SaveToBitMap;
-    UBitMapFunctions.SaveToFile(
-      BM,
-      FileName);
-    BM.Free;
+    IMask.SaveToFile(FileName);
   end;
 end;
 
@@ -216,18 +169,12 @@ begin
   DrawIOut;
 end;
 
-procedure TFMain.ImgMaskMouseDown(
-  Sender: TObject;
-  Button: TMouseButton;
-  Shift: TShiftState;
-  X, Y: Integer);
+procedure TFMain.ImgMaskMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   w: word;
 begin
   /// Выбираем размер пикселя
-  w := min(
-    ImgMask.Height div IMask.Height,
-    ImgMask.Width div IMask.Width);
+  w := min(ImgMask.Height div IMask.Height, ImgMask.Width div IMask.Width);
   /// Левой кнопкой создаём макску
   if Button = mbLeft then
   begin
@@ -244,18 +191,12 @@ begin
   DrawMask;
 end;
 
-procedure TFMain.ImgInMouseDown(
-  Sender: TObject;
-  Button: TMouseButton;
-  Shift: TShiftState;
-  X, Y: Integer);
+procedure TFMain.ImgInMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   w: word;
 begin
   /// Выбираем размер пикселя
-  w := min(
-    ImgIn.Height div IIn.Height,
-    ImgIn.Width div IIn.Width);
+  w := min(ImgIn.Height div IIn.Height, ImgIn.Width div IIn.Width);
   /// Меняем значение соответствующего пиксела на противоположное
   IIn.Pixels[Y div w, X div w] := not IIn.Pixels[Y div w, X div w];
   /// Отрисовываем исходное изображение
@@ -290,10 +231,7 @@ procedure TFMain.BClosingClick(Sender: TObject);
 begin
   IOut.FreeBinaryImage;
   IOut := TCBinaryImage.CreateCopy(IIn);
-  IOut.closing(
-    IMask,
-    MaskRow - 1,
-    MaskCol - 1);
+  IOut.closing(IMask, MaskRow - 1, MaskCol - 1);
   DrawIOut;
 end;
 
@@ -301,10 +239,7 @@ procedure TFMain.BDilatationClick(Sender: TObject);
 begin
   IOut.FreeBinaryImage;
   IOut := TCBinaryImage.CreateCopy(IIn);
-  IOut.dilatation(
-    IMask,
-    MaskRow - 1,
-    MaskCol - 1);
+  IOut.dilatation(IMask, MaskRow - 1, MaskCol - 1);
   DrawIOut;
 end;
 
@@ -312,10 +247,7 @@ procedure TFMain.BErosionClick(Sender: TObject);
 begin
   IOut.FreeBinaryImage;
   IOut := TCBinaryImage.CreateCopy(IIn);
-  IOut.erosion(
-    IMask,
-    MaskRow - 1,
-    MaskCol - 1);
+  IOut.erosion(IMask, MaskRow - 1, MaskCol - 1);
   DrawIOut;
 end;
 
@@ -323,28 +255,20 @@ procedure TFMain.BOpeningClick(Sender: TObject);
 begin
   IOut.FreeBinaryImage;
   IOut := TCBinaryImage.CreateCopy(IIn);
-  IOut.opening(
-    IMask,
-    MaskRow - 1,
-    MaskCol - 1);
+  IOut.opening(IMask, MaskRow - 1, MaskCol - 1);
   DrawIOut;
 end;
 
 procedure TFMain.BSaveIInClick(Sender: TObject);
 var
   FileName: string;
-  BM: TBitMap;
 begin
   if SPD.Execute then
   begin
     FileName := SPD.FileName;
     if UpperCase(ExtractFileExt(FileName)) <> '.PNG' then
       FileName := FileName + '.PNG';
-    BM := IIn.SaveToBitMap;
-    UBitMapFunctions.SaveToFile(
-      BM,
-      FileName);
-    BM.Free;
+    IIn.SaveToFile(FileName);
   end;
 end;
 
@@ -367,16 +291,12 @@ begin
   DrawAll;
 end;
 
-procedure TFMain.UDIInClick(
-  Sender: TObject;
-  Button: TUDBtnType);
+procedure TFMain.UDIInClick(Sender: TObject; Button: TUDBtnType);
 begin
   ResizeBI;
 end;
 
-procedure TFMain.UDMaskClick(
-  Sender: TObject;
-  Button: TUDBtnType);
+procedure TFMain.UDMaskClick(Sender: TObject; Button: TUDBtnType);
 begin
   ResizeMask;
 end;
